@@ -1,5 +1,4 @@
-import Button from "../../components/Button/Button";
-import TextField from "../../components/TextField";
+import { Button, TextField } from "../../components";
 
 const Landing = () => {
   return (
@@ -9,10 +8,10 @@ const Landing = () => {
         display: "flex",
         flexDirection: "column",
         alignItems: "flex-start",
-        gap: "1rem"
+        gap: "1rem",
       }}
     >
-   <TextField placeholder="placeholder" />
+      <TextField placeholder="placeholder" />
       <TextField label="label" placeholder="placeholder" />
       <TextField label="label" hint="hint" placeholder="placeholder" />
       <TextField label="label" hint="hint" placeholder="placeholder" error />
