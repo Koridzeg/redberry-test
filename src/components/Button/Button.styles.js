@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
 export const StyledButton = styled.button`
-  all: unset;
   min-width: 100px;
-  padding: 18px 60px;
+  max-height: ${(props) => props.theme.sizes.inputHeight};
+  padding: 15px 60px;
   color: white;
   text-align: center;
   font-size: ${(props) => props.theme.fontSizes.medium};

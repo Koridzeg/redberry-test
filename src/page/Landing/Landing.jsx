@@ -1,4 +1,5 @@
 import Button from "../../components/Button/Button";
+import TextField from "../../components/TextField";
 
 const Landing = () => {
   return (
@@ -6,14 +7,15 @@ const Landing = () => {
       style={{
         padding: "2rem",
         display: "flex",
-        gap: "1rem",
-        flexWrap: "wrap"
+        flexDirection: "column",
+        alignItems: "flex-start",
+        gap: "1rem"
       }}
     >
-      <Button>Button</Button>
-      <Button>Button 1</Button>
-      <Button>Button 2</Button>
-      <Button>Button 3adsfsadfasdfs </Button>
+   <TextField placeholder="placeholder" />
+      <TextField label="label" placeholder="placeholder" />
+      <TextField label="label" hint="hint" placeholder="placeholder" />
+      <TextField label="label" hint="hint" placeholder="placeholder" error />
     </div>
   );
 };
