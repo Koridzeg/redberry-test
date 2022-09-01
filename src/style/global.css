@@ -64,6 +64,12 @@ select {
   font: inherit;
 }
 
+#root {
+  width: 100vw;
+  height: 100vh;
+}
+
+
 button {
   border: none;
   vertical-align: middle;

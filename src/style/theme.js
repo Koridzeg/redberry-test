@@ -36,6 +36,9 @@ const theme = {
   shadows: {},
   zIndices: {},
   transitions: {},
+  breakpoints: {
+    small: "390px"
+  }
 };
 
 export default theme;
