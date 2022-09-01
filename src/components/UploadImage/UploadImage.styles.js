@@ -48,9 +48,10 @@ export const StyledImageContainer = styled.div`
   width: 100%;
   height: 300px;
   & img {
-    margin: auto;
     height: 100%;
-    object-fit: contain;
+    width: 100%;
+    object-fit: cover;
+    border-radius: ${(props) => props.theme.radii.small};
   }
 `;
 
