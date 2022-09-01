@@ -5,8 +5,8 @@ import {
   RadioGroup,
   Select,
   SelectItem,
+  UploadImage,
 } from "../../components";
-import UploadImage from "../../components/UploadImage/UploadImage";
 
 const Landing = () => {
   return (
@@ -19,7 +19,7 @@ const Landing = () => {
         gap: "1rem",
       }}
     >
-<UploadImage />
+      <UploadImage />
     </div>
   );
 };
