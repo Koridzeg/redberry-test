@@ -6,6 +6,7 @@ const theme = {
     blue400: "#8AC0E2",
     blue500: "#6499FF",
     blue600: "#f3f5ff",
+    blue700: "#4d9ac3",
     gray100: "#2E2E2E",
     red100: "#E52F2F",
   },

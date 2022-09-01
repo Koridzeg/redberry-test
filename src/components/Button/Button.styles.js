@@ -8,6 +8,7 @@ export const StyledButton = styled.button`
   text-align: center;
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: bold;
+  white-space: nowrap;
   background-color: ${(props) => props.theme.colors.blue100};
   border-radius: ${(props) => props.theme.radii.small};
   transition: background-color 100ms ease-in-out;
