@@ -18,8 +18,6 @@ const Landing = () => {
         alignItems: "flex-start",
         gap: "1rem",
       }}
-    >
-      <UploadImage />
-    </div>
+    ></div>
   );
 };

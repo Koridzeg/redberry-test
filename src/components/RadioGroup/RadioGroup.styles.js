@@ -9,10 +9,17 @@ export const StyledFieldset = styled.fieldset`
 `;
 
 export const StyledLegend = styled.legend`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
   font-size: ${(props) => props.theme.fontSizes.medium};
   font-weight: bold;
   text-transform: capitalize;
   color: ${(props) => (props.error ? props.theme.colors.red100 : "initial")};
+  & img {
+    width: 22.11px;
+    height: 20px;
+  }
 `;
 
 export const StyledContainer = styled.label`

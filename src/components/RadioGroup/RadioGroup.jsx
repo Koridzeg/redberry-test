@@ -4,8 +4,9 @@ import {
   StyledFieldset,
   StyledLabel,
   StyledLegend,
-  StyledRadio
+  StyledRadio,
 } from "./RadioGroup.styles";
+import WarningIconUrl from "../../assets/images/warning.png";
 
 const RadioContext = createContext();
 
@@ -46,7 +47,9 @@ const RadioGroup = forwardRef(
     return (
       <RadioContext.Provider value={{ radioValue, handleRadioChange }}>
         <StyledFieldset {...props} ref={ref}>
-          <StyledLegend error={error}>{label}</StyledLegend>
+          <StyledLegend error={error}>
+            {label} {error && <img src={WarningIconUrl} alt="warning" />}
+          </StyledLegend>
           {children}
         </StyledFieldset>
       </RadioContext.Provider>
