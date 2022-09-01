@@ -6,6 +6,7 @@ import {
   Select,
   SelectItem,
 } from "../../components";
+import UploadImage from "../../components/UploadImage/UploadImage";
 
 const Landing = () => {
   return (
@@ -18,12 +19,7 @@ const Landing = () => {
         gap: "1rem",
       }}
     >
-      <Select placeholder="team" error>
-        <SelectItem value="human resources">human resources</SelectItem>
-        <SelectItem value="front end">front end</SelectItem>
-        <SelectItem value="back end">back end</SelectItem>
-      </Select>
-      <Button>Button</Button>
+<UploadImage />
     </div>
   );
 };
