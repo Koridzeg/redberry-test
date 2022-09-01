@@ -1,4 +1,11 @@
-import { Button, TextField } from "../../components";
+import {
+  Button,
+  TextField,
+  Radio,
+  RadioGroup,
+  Select,
+  SelectItem,
+} from "../../components";
 
 const Landing = () => {
   return (
@@ -11,12 +18,12 @@ const Landing = () => {
         gap: "1rem",
       }}
     >
-      <TextField placeholder="placeholder" />
-      <TextField label="label" placeholder="placeholder" />
-      <TextField label="label" hint="hint" placeholder="placeholder" />
-      <TextField label="label" hint="hint" placeholder="placeholder" error />
+      <Select placeholder="team" error>
+        <SelectItem value="human resources">human resources</SelectItem>
+        <SelectItem value="front end">front end</SelectItem>
+        <SelectItem value="back end">back end</SelectItem>
+      </Select>
+      <Button>Button</Button>
     </div>
   );
 };
-
-export default Landing;

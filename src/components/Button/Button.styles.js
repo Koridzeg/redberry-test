@@ -12,6 +12,7 @@ export const StyledButton = styled.button`
   background-color: ${(props) => props.theme.colors.blue100};
   border-radius: ${(props) => props.theme.radii.small};
   transition: background-color 100ms ease-in-out;
+  user-select: none;
   cursor: pointer;
   &:hover {
     background-color: ${(props) => props.theme.colors.blue200};
