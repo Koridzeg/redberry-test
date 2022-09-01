@@ -7,7 +7,7 @@ import {
   StyledImageInfoContainer,
   StyledPreviewContainer,
   StyledUploadButtonContainer,
-  StyledUploadImage
+  StyledUploadImage,
 } from "./UploadImage.styles";
 import Button from "../Button";
 import WarningIconUrl from "../../assets/images/warning.png";
@@ -43,7 +43,7 @@ const UploadImage = forwardRef(
               <div>{formatFileSize(image.size)}</div>
             </StyledImageInfo>
             <StyledUploadButtonContainer>
-              <Button>Re upload</Button>
+              <Button>თავიდან ატვირთე</Button>
               <StyledUploadImage
                 type="file"
                 accept="image/*"
@@ -68,8 +68,9 @@ const UploadImage = forwardRef(
         />
         <StyledContent error={error}>
           {error && <img src={WarningIconUrl} alt="warning" />}
-          text
-          <Button>Upload</Button>
+          ჩააგდე ან ატვირთე <br />
+          ლეპტოპის ფოტო
+          <Button>ატვირთე</Button>
         </StyledContent>
       </StyledContainer>
     );

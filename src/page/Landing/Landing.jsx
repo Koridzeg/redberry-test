@@ -10,14 +10,14 @@ import {
 
 const Landing = () => {
   return (
-    <div
-      style={{
-        padding: "2rem",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "flex-start",
-        gap: "1rem",
-      }}
-    ></div>
+    <div>
+      <img />
+      <picture>
+        <src />
+        <src />
+      </picture>
+      <Button>ჩანაწერის დამატება</Button>
+      <Button>ჩანაწერების სია</Button>
+    </div>
   );
 };
