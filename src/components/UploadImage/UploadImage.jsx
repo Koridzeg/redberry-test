@@ -10,8 +10,10 @@ import {
   StyledUploadImage,
 } from "./UploadImage.styles";
 import Button from "../Button";
+import CameraIconUrl from "../../assets/images/camera.png";
 import WarningIconUrl from "../../assets/images/warning.png";
 import SuccessIconUrl from "../../assets/images/success.png";
+import { SMALL_BREAKPOINT } from "../../style/theme";
 
 const formatFileSize = function (bytes) {
   const sufixes = ["B", "kB", "MB", "GB", "TB"];
@@ -20,7 +22,7 @@ const formatFileSize = function (bytes) {
 };
 
 const UploadImage = forwardRef(
-  ({ type, accept, onChange, error, ...props }, ref) => {
+  ({ type, accept, onChange, error, defaultImage, ...props }, ref) => {
     const [image, setImage] = useState();
     const previewUrl = image && URL.createObjectURL(image);
 
@@ -67,10 +69,16 @@ const UploadImage = forwardRef(
           {...props}
         />
         <StyledContent error={error}>
-          {error && <img src={WarningIconUrl} alt="warning" />}
+          {error ? (
+            <img src={WarningIconUrl} alt="warning" />
+          ) : (
+            window.innerWidth <= SMALL_BREAKPOINT && (
+              <img src={CameraIconUrl} alt="camera" />
+            )
+          )}
           ჩააგდე ან ატვირთე <br />
           ლეპტოპის ფოტო
-          <Button>ატვირთე</Button>
+          {window.innerWidth > SMALL_BREAKPOINT && <Button>ატვირთე</Button>}
         </StyledContent>
       </StyledContainer>
     );

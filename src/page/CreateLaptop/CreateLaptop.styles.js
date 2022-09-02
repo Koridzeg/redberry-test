@@ -31,7 +31,7 @@ export const StyledHeader = styled.header`
 export const StyledStepContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: ${(props) => props.alignItems ?? "flex-end"};
   gap: 1rem;
   height: 100%;
   padding: 2rem 1rem 3rem;

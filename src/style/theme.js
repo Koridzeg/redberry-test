@@ -1,3 +1,5 @@
+export const SMALL_BREAKPOINT = 390;
+
 const theme = {
   colors: {
     blue100: "#62A1EB",
@@ -40,7 +42,7 @@ const theme = {
   },
   transitions: {},
   breakpoints: {
-    small: "390px"
+    small: SMALL_BREAKPOINT + "px"
   }
 };
 

@@ -3,6 +3,8 @@ import TextField from "./TextField";
 import { Radio, RadioGroup } from "./RadioGroup";
 import { Select, SelectItem } from "./Select";
 import UploadImage from "./UploadImage";
+import Flex from "./Flex";
+import Divider from "./Divider";
 export {
   Button,
   TextField,
@@ -10,5 +12,7 @@ export {
   RadioGroup,
   Select,
   SelectItem,
-  UploadImage
+  UploadImage,
+  Flex,
+  Divider
 };

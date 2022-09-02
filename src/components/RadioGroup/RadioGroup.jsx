@@ -19,13 +19,14 @@ function useRadio() {
 }
 
 const Radio = forwardRef(({ type, children, ...props }, ref) => {
-  const { radioValue, handleRadioChange } = useRadio();
+  const { radioValue, handleRadioChange, name } = useRadio();
 
   return (
     <StyledContainer>
       <StyledRadio
+        name={name}
         checked={props.value === radioValue}
-        onChange={() => handleRadioChange(props.value)}
+        onChange={(e) => handleRadioChange({ value: props.value, e })}
         type="radio"
         {...props}
         ref={ref}
@@ -36,16 +37,19 @@ const Radio = forwardRef(({ type, children, ...props }, ref) => {
 });
 
 const RadioGroup = forwardRef(
-  ({ children, label, value, onChange, error, ...props }, ref) => {
+  (
+    { children, label, value, onChange, error, onBlur, name, ...props },
+    ref
+  ) => {
     const [radioValue, setRadioValue] = useState(value);
 
-    function handleRadioChange(newValue) {
-      setRadioValue(newValue);
-      onChange && onChange(newValue);
+    function handleRadioChange({ value, e }) {
+      setRadioValue(value);
+      onChange && onChange(e);
     }
 
     return (
-      <RadioContext.Provider value={{ radioValue, handleRadioChange }}>
+      <RadioContext.Provider value={{ radioValue, handleRadioChange, name }}>
         <StyledFieldset {...props} ref={ref}>
           <StyledLegend error={error}>
             {label} {error && <img src={WarningIconUrl} alt="warning" />}

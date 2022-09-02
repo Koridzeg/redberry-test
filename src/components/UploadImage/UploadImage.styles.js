@@ -40,6 +40,7 @@ export const StyledUploadImage = styled.input`
 export const StyledPreviewContainer = styled.div`
   width: 100%;
   height: 300px;
+  margin-bottom: 5rem;
   background-color: ${(props) => props.theme.colors.gray300};
   border-radius: ${(props) => props.theme.radii.small};
 `;
@@ -70,9 +71,15 @@ export const StyledImageInfo = styled.div`
 
 export const StyledUploadButtonContainer = styled.div`
   position: relative;
+  max-width: 50%;
   & input[type="file"] {
     position: absolute;
     top: 0;
     left: 0;
+  }
+  & button {
+    max-width: 100%;
+    padding: 15px;
+    font-size: smaller;
   }
 `;

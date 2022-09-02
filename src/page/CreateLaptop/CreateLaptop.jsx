@@ -1,9 +1,19 @@
-import { TextField, Select, SelectItem, Button } from "../../components";
-import { useEffect, useState } from "react";
+import {
+  TextField,
+  Select,
+  SelectItem,
+  Button,
+  UploadImage,
+  RadioGroup,
+  Radio,
+  Flex,
+  Divider
+} from "../../components";
+import { useEffect } from "react";
 import LeftArrowIconUrl from "../../assets/images/left_arrow.png";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAsync } from "../../hooks/use-async";
-import { getPositions, getTeams } from "../../api";
+import { getBrands, getCPUS, getPositions, getTeams } from "../../api";
 import {
   StyledContainer,
   StyledHeader,
@@ -19,6 +29,18 @@ const initialValues = {
   position_id: undefined,
   phone_number: "",
   email: "",
+
+  laptop_image: undefined,
+  laptop_name: "",
+  laptop_brand_id: undefined,
+  laptop_cpu: "",
+  laptop_cpu_cores: undefined,
+  laptop_cpu_threads: undefined,
+  laptop_ram: undefined,
+  laptop_hard_drive_type: "",
+  laptop_state: "",
+  laptop_purchase_date: "",
+  laptop_price: undefined
 };
 
 const validate = (values) => {
@@ -217,9 +239,192 @@ export const FirstStep = () => {
   );
 };
 
-export const SecondStep = () => (
-  <StyledStepContainer>step 2</StyledStepContainer>
-);
+export const SecondStep = () => {
+  const formik = useFormikContext();
+  const {
+    data: brands,
+    error: brandsError,
+    isLoading: brandsIsLoading,
+    run: brandsRun
+  } = useAsync(getBrands);
+  const {
+    data: cpus,
+    error: cpusError,
+    isLoading: cpusIsLoading,
+    run: cpusRun
+  } = useAsync(getCPUS);
+
+  const [, setPersistedValues] = useLocalStorage(
+    "create-laptop",
+    initialValues
+  );
+
+  function handleFormikFieldChange(e) {
+    setPersistedValues({ ...formik.values, [e.target.name]: e.target.value });
+    return formik.handleChange(e);
+  }
+
+  function handleFormikSelectChange({ name, value }) {
+    setPersistedValues({ ...formik.values, [name]: value });
+    formik.setFieldValue(name, value);
+  }
+
+  function handleFormikUploadImageChange(event) {
+    setPersistedValues({
+      ...formik.values,
+      [event.target.name]: event.target.files[0]
+    });
+    formik.setFieldValue(event.target.name, event.target.files[0]);
+  }
+
+  useEffect(() => {
+    brandsRun();
+    cpusRun();
+  }, [brandsRun, cpusRun]);
+
+  if (
+    brandsIsLoading ||
+    cpusIsLoading ||
+    (!brands && !brandsError) ||
+    (!cpus && !cpusError)
+  ) {
+    return <div>loading...</div>;
+  }
+
+  if (brandsError || cpusError) {
+    return <div>an error has occurred</div>;
+  }
+
+  return (
+    <StyledStepContainer alignItems="flex-start">
+      <UploadImage
+        name="laptop_image"
+        onChange={handleFormikUploadImageChange}
+        error={formik.errors.laptop_image}
+      />
+      <TextField
+        label="ლეპტოპის სახელი"
+        placeholder="HP"
+        hint="ლათინური ასოები,ციფრები,!@$^&*()_+="
+        name="laptop_name"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_name}
+        error={formik.errors.laptop_name}
+      />
+      <Select
+        name="laptop_brand_id"
+        value={formik.values.laptop_brand_id}
+        onChange={handleFormikSelectChange}
+        onBlur={formik.handleBlur}
+        placeholder="ლეპტოპის ბრენდი"
+        error={formik.errors.laptop_brand_id}
+        defaultLabel={
+          brands?.data?.find(
+            (brand) => brand.id === formik.values.laptop_brand_id
+          )?.name
+        }
+      >
+        {brands?.data.map((brand) => (
+          <SelectItem key={brand.id} value={brand.id} label={brand.name} />
+        ))}
+      </Select>
+      <Divider />
+      <Select
+        name="laptop_cpu"
+        value={formik.values.laptop_cpu}
+        onChange={handleFormikSelectChange}
+        onBlur={formik.handleBlur}
+        placeholder="CPU"
+        error={formik.errors.laptop_cpu}
+        defaultLabel={
+          cpus?.data?.find((cpu) => cpu.id === formik.values.laptop_cpu)?.name
+        }
+      >
+        {cpus?.data.map((cpu) => (
+          <SelectItem key={cpu.id} value={cpu.id} label={cpu.name} />
+        ))}
+      </Select>
+      <TextField
+        label="CPU_ს ბირთვი"
+        placeholder="14"
+        hint="მხოლოდ ციფრები"
+        name="laptop_cpu_cores"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_cpu_cores}
+        error={formik.errors.laptop_cpu_cores}
+      />
+      <TextField
+        label="CPU_ს ნაკადი"
+        placeholder="365"
+        hint="მხოლოდ ციფრები"
+        name="laptop_cpu_threads"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_cpu_threads}
+        error={formik.errors.laptop_cpu_threads}
+      />
+      <TextField
+        label="ლეპტოპის RAM (GB)"
+        placeholder="16"
+        hint="მხოლოდ ციფრები"
+        name="laptop_ram"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_ram}
+        error={formik.errors.laptop_ram}
+      />
+      <RadioGroup
+        name="laptop_hard_drive_type"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_hard_drive_type}
+        error={formik.errors.laptop_hard_drive_type}
+        label="მეხსიერების ტიპი"
+      >
+        <Radio value="ssd">SSD</Radio>
+        <Radio value="hdd">HDD</Radio>
+      </RadioGroup>
+      <Divider />
+      <TextField
+        label="შეძენის რიცხვი ( არჩევითი ) "
+        placeholder="დდ / თთ / წწწწ"
+        name="laptop_purchase_date"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_purchase_date}
+        error={formik.errors.laptop_purchase_date}
+      />
+      <TextField
+        label="ლეპტოპის ფასი"
+        hint="მხოლოდ ციფრები"
+        name="laptop_price"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_price}
+        error={formik.errors.laptop_price}
+      />
+      <RadioGroup
+        name="laptop_state"
+        onChange={handleFormikFieldChange}
+        onBlur={formik.handleBlur}
+        value={formik.values.laptop_state}
+        error={formik.errors.laptop_state}
+        label="ლეპტოპის მდგომარეობა"
+      >
+        <Radio value="new">ახალი</Radio>
+        <Radio value="used">მეორადი</Radio>
+      </RadioGroup>
+      <Flex margin="2rem 0 0 0">
+        <Link to="/create/1">
+          <p>უკან</p>
+        </Link>
+        <Button type="submit">დამახსოვრება</Button>
+      </Flex>
+    </StyledStepContainer>
+  );
+};
 
 const CreateLaptop = () => {
   const [persistedValues, setPersistedValues] = useLocalStorage(

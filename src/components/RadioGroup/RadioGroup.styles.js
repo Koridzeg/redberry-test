@@ -6,6 +6,8 @@ export const StyledFieldset = styled.fieldset`
     props.direction === "vertical" ? "column" : "row"};
   gap: 2rem;
   border: none;
+  padding: 0;
+  margin: 0;
 `;
 
 export const StyledLegend = styled.legend`
@@ -16,6 +18,7 @@ export const StyledLegend = styled.legend`
   font-weight: bold;
   text-transform: capitalize;
   color: ${(props) => (props.error ? props.theme.colors.red100 : "initial")};
+  margin-bottom: 1rem;
   & img {
     width: 22.11px;
     height: 20px;
