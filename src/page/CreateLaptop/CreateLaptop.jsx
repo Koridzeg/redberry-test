@@ -7,7 +7,7 @@ import {
   RadioGroup,
   Radio,
   Flex,
-  Divider
+  Divider,
 } from "../../components";
 import { useEffect } from "react";
 import LeftArrowIconUrl from "../../assets/images/left_arrow.png";
@@ -40,12 +40,14 @@ const initialValues = {
   laptop_hard_drive_type: "",
   laptop_state: "",
   laptop_purchase_date: "",
-  laptop_price: undefined
+  laptop_price: undefined,
 };
 
 const validate = (values) => {
   const errors = {};
   const onlyGeorgian = /^[ა-ჰ]+$/g;
+  const onlyEnglishAndNumbers = /^[a-zA-Z0-0]+$/g;
+  const onlyNumbers = /^[0-9]+$/g;
 
   if (
     !values.name ||
@@ -85,6 +87,54 @@ const validate = (values) => {
     String(formattedNumber).length !== 12
   ) {
     errors.phone_number = "Required";
+  }
+
+  if (
+    !values.laptop_name ||
+    !new RegExp(onlyEnglishAndNumbers).test(values.laptop_name)
+  ) {
+    errors.laptop_name = "Required";
+  }
+
+  if (!values.laptop_brand_id) {
+    errors.laptop_brand_id = "Required";
+  }
+
+  if (!values.laptop_cpu) {
+    errors.laptop_cpu = "Required";
+  }
+
+  if (
+    !values.laptop_cpu_cores ||
+    !new RegExp(onlyNumbers).test(values.laptop_cpu_cores)
+  ) {
+    errors.laptop_cpu_cores = "Required";
+  }
+
+  if (
+    !values.laptop_cpu_threads ||
+    !new RegExp(onlyNumbers).test(values.laptop_cpu_threads)
+  ) {
+    errors.laptop_cpu_threads = "Required";
+  }
+
+  if (!values.laptop_ram || !new RegExp(onlyNumbers).test(values.laptop_ram)) {
+    errors.laptop_ram = "Required";
+  }
+
+  if (!values.laptop_hard_drive_type) {
+    errors.laptop_hard_drive_type = "Required";
+  }
+
+  if (
+    !values.laptop_price ||
+    !new RegExp(onlyNumbers).test(values.laptop_price)
+  ) {
+    errors.laptop_price = "Required";
+  }
+
+  if (!values.laptop_state) {
+    errors.laptop_state = "Required";
   }
 
   return errors;
@@ -245,13 +295,13 @@ export const SecondStep = () => {
     data: brands,
     error: brandsError,
     isLoading: brandsIsLoading,
-    run: brandsRun
+    run: brandsRun,
   } = useAsync(getBrands);
   const {
     data: cpus,
     error: cpusError,
     isLoading: cpusIsLoading,
-    run: cpusRun
+    run: cpusRun,
   } = useAsync(getCPUS);
 
   const [, setPersistedValues] = useLocalStorage(
@@ -272,7 +322,7 @@ export const SecondStep = () => {
   function handleFormikUploadImageChange(event) {
     setPersistedValues({
       ...formik.values,
-      [event.target.name]: event.target.files[0]
+      [event.target.name]: event.target.files[0],
     });
     formik.setFieldValue(event.target.name, event.target.files[0]);
   }
