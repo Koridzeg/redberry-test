@@ -17,4 +17,4 @@ const createLaptop = (data) =>
     }
   });
 
-export { getTeams, getPositions, getBrands, getCPUS };
+export { getTeams, getPositions, getBrands, getCPUS,createLaptop };
