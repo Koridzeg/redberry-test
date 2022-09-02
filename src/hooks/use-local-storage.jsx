@@ -25,9 +25,7 @@ export default function useLocalStorage(key, initialValue) {
       if (typeof window !== "undefined") {
         window.localStorage.setItem(key, JSON.stringify(valueToStore));
       }
-    } catch (error) {
-      console.log(error);
-    }
+    } catch (error) {}
   };
 
   return [storedValue, setValue];

@@ -3,6 +3,8 @@ import styled from "styled-components";
 export const StyledContainer = styled.div`
   width: 100%;
   position: relative;
+  opacity: ${(props) => (props.disabled ? "0.5" : "1")};
+  cursor: not-allowed;
 `;
 
 export const StyledSelect = styled.div`
@@ -20,6 +22,7 @@ export const StyledSelect = styled.div`
   user-select: none;
   border: ${(props) =>
     props.error ? "2px solid " + props.theme.colors.red100 : "none"};
+    pointer-events: ${(props) => (props.disabled ? "none" : "all")};
   & img {
     width: 16px;
     height: 10px;

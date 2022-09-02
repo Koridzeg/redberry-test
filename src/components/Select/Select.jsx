@@ -25,32 +25,48 @@ function useSelect() {
   return context;
 }
 
-const SelectItem = forwardRef(({ children, value }, ref) => {
+const SelectItem = forwardRef(({ label, value }, ref) => {
   const { handleSelectChange, handleCloseSelect } = useSelect();
 
   return (
     <StyledSelectItem
       ref={ref}
       onClick={() => {
-        handleSelectChange(value);
+        handleSelectChange({ value, label });
         handleCloseSelect();
       }}
     >
-      {children}
+      {label}
     </StyledSelectItem>
   );
 });
 
 const Select = forwardRef(
-  ({ children, value, onChange, placeholder, error }, ref) => {
-    const [selectValue, setSelectValue] = useState(value);
+  (
+    {
+      children,
+      value,
+      onChange,
+      placeholder,
+      error,
+      name,
+      defaultLabel,
+      disabled,
+    },
+    ref
+  ) => {
+    const [selectedValue, setSelectedValue] = useState(value);
+    const [selectedLabel, setSelectedLabel] = useState(
+      defaultLabel ?? placeholder ?? ""
+    );
     const [isSelectOpen, setIsSelectOpen] = useState(false);
     const popoverRef = useRef();
     useOutsideClick(popoverRef, handleCloseSelect);
 
-    function handleSelectChange(newValue) {
-      setSelectValue(newValue);
-      onChange && onChange(newValue);
+    function handleSelectChange({ value, label }) {
+      setSelectedValue(value);
+      setSelectedLabel(label);
+      onChange && onChange({ name, value });
     }
 
     function handleCloseSelect() {
@@ -61,16 +77,25 @@ const Select = forwardRef(
       setIsSelectOpen(!isSelectOpen);
     }
     useEffect(() => {
-      setSelectValue(value);
-    }, [value]);
+      setSelectedValue(value);
+      setSelectedLabel(defaultLabel ?? placeholder ?? "");
+    }, [defaultLabel, placeholder, value]);
 
     return (
       <SelectContext.Provider
-        value={{ selectValue, handleSelectChange, handleCloseSelect }}
+        value={{
+          handleSelectChange,
+          handleCloseSelect,
+        }}
       >
-        <StyledContainer ref={popoverRef}>
-          <StyledSelect onClick={handleToggleSelect} error={error} ref={ref}>
-            {selectValue ?? placeholder}
+        <StyledContainer ref={popoverRef} disabled={disabled}>
+          <StyledSelect
+            onClick={handleToggleSelect}
+            error={error}
+            ref={ref}
+            disabled={disabled}
+          >
+            {selectedLabel}
             <img src={ArrowDownUrl} alt="" />
           </StyledSelect>
           {isSelectOpen && (
