@@ -34,7 +34,10 @@ const theme = {
     small: "8px",
   },
   shadows: {},
-  zIndices: {},
+  zIndices: {
+    popover: 2,
+    modal: 3
+  },
   transitions: {},
   breakpoints: {
     small: "390px"

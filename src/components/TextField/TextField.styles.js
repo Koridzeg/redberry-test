@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledTextField = styled.input`
-  width: 280px;
+  width: 100%;
   height: ${(props) => props.theme.sizes.inputHeight};
   border-radius: ${(props) => props.theme.radii.small};
   border: 1.8px solid
@@ -19,6 +19,8 @@ export const StyledContainer = styled.label`
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
+  min-width: 280px;
+  width: 100%;
 `;
 
 export const StyledLabel = styled.p`

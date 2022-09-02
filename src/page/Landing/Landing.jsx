@@ -22,7 +22,7 @@ const Landing = () => {
         <img src={LandingMobileImageUrl} alt="landing hero" />
       </picture>
       <StyledButtonContainer>
-        <Link to="create">
+        <Link to="create/1">
           <Button>ჩანაწერის დამატება</Button>
         </Link>
         <Link to="laptops">

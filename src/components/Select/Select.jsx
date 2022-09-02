@@ -1,10 +1,17 @@
-import { createContext, forwardRef, useContext, useRef, useState } from "react";
+import {
+  createContext,
+  forwardRef,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import useOutsideClick from "../../hooks/use-outside-click";
 import {
   StyledContainer,
   StyledSelect,
   StyledSelectItem,
-  StyledSelectPopover
+  StyledSelectPopover,
 } from "./Select.styles";
 import ArrowDownUrl from "../../assets/images/down_arrow.png";
 
@@ -53,6 +60,9 @@ const Select = forwardRef(
     function handleToggleSelect() {
       setIsSelectOpen(!isSelectOpen);
     }
+    useEffect(() => {
+      setSelectValue(value);
+    }, [value]);
 
     return (
       <SelectContext.Provider

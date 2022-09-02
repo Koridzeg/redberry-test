@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledContainer = styled.div`
+  width: 100%;
   position: relative;
 `;
 
@@ -8,7 +9,8 @@ export const StyledSelect = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 280px;
+  min-width: 280px;
+  width: 100%;
   height: ${(props) => props.theme.sizes.inputHeight};
   padding: 1rem;
   background-color: ${(props) => props.theme.colors.gray200};
@@ -30,6 +32,7 @@ export const StyledSelectPopover = styled.div`
   background-color: ${(props) => props.theme.colors.white100};
   border-radius: ${(props) => props.theme.radii.small};
   filter: drop-shadow(0px 4px 34px rgba(0, 0, 0, 0.25));
+  z-index: ${(props) => props.theme.zIndices.popover};
   & > :first-child {
     border-top-left-radius: ${(props) => props.theme.radii.small};
     border-top-right-radius: ${(props) => props.theme.radii.small};
