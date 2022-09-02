@@ -7,6 +7,7 @@ const Landing = lazy(() => import("./page/Landing"));
 const CreateLaptop = lazy(() => import("./page/CreateLaptop"));
 const ViewLaptopDetails = lazy(() => import("./page/ViewLaptopDetails"));
 const ViewLaptops = lazy(() => import("./page/ViewLaptops"));
+const Success = lazy(() => import("./page/Success"));
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
               <Route path="create" element={<CreateLaptop />}>
                 <Route path="1" element={<FirstStep />} />
                 <Route path="2" element={<SecondStep />} />
+                <Route path="success" element={<Success />} />
               </Route>
               <Route path="laptops">
                 <Route index element={<ViewLaptopDetails />} />

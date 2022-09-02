@@ -11,6 +11,7 @@ const theme = {
     blue700: "#4d9ac3",
     blue800: "#E7F0F8",
     blue900: "#4386A9",
+    blue1000: "#0089A7",
     gray100: "#2E2E2E",
     gray200: "#EBEBEB",
     gray300: "#F7F7F7",
