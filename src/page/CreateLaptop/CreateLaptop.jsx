@@ -13,7 +13,13 @@ import { useEffect } from "react";
 import LeftArrowIconUrl from "../../assets/images/left_arrow.png";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAsync } from "../../hooks/use-async";
-import { getBrands, getCPUS, getPositions, getTeams } from "../../api";
+import {
+  getBrands,
+  getCPUS,
+  getPositions,
+  getTeams,
+  createLaptop,
+} from "../../api";
 import {
   StyledContainer,
   StyledHeader,
@@ -490,6 +496,12 @@ export const SecondStep = () => {
 };
 
 const CreateLaptop = () => {
+  const {
+    error: createLaptopError,
+    isLoading: createLaptopIsLoading,
+    run: createLaptopRun
+  } = useAsync(createLaptop);
+
   const [persistedValues, setPersistedValues] = useLocalStorage(
     "create-laptop",
     initialValues
@@ -501,6 +513,15 @@ const CreateLaptop = () => {
   if (pathname.includes("success")) {
     return <Outlet />;
   }
+
+  if (createLaptopIsLoading) {
+    return <div>loading...</div>;
+  }
+
+  if (createLaptopError) {
+    return <div>an error has occurred</div>;
+  }
+
 
   return (
     <StyledContainer>
@@ -520,9 +541,14 @@ const CreateLaptop = () => {
       <Formik
         initialValues={persistedValues}
         validate={validate}
+        validateOnBlur={false}
+        validateOnChange={false}
         onSubmit={(values) => {
           console.log(values);
-          setPersistedValues();
+          createLaptopRun(values).then(() => {
+            setPersistedValues();
+            navigate("/create/success");
+          });
         }}
       >
         {(props) => (

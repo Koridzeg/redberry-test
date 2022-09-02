@@ -5,22 +5,25 @@ export const useAsync = (promise) => {
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const run = useCallback(() => {
-    if (!promise) {
-      throw new Error("provide a promise");
-    }
+  const run = useCallback(
+    (...arg) => {
+      if (!promise) {
+        throw new Error("provide a promise");
+      }
 
-    return promise()
-      .then(async (response) => {
-        const data = await response.json();
-        setData(data);
-        return data;
-      })
-      .catch((error) => {
-        setError(error);
-        return error;
-      });
-  }, [promise]);
+      return promise(arg)
+        .then(async (response) => {
+          const data = await response.json();
+          setData(data);
+          return data;
+        })
+        .catch((error) => {
+          setError(error);
+          return error;
+        });
+    },
+    [promise]
+  );
 
   const reset = () => {
     setData();
