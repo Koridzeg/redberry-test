@@ -23,8 +23,8 @@ function App() {
                 <Route path="success" element={<Success />} />
               </Route>
               <Route path="laptops">
-                <Route index element={<ViewLaptopDetails />} />
-                <Route path=":laptop_id" element={<ViewLaptops />} />
+                <Route index element={<ViewLaptops />} />
+                <Route path=":laptop_id" element={<ViewLaptopDetails />} />
               </Route>
             </Route>
           </Routes>

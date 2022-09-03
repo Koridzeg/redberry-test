@@ -4,14 +4,14 @@ import {
   useContext,
   useEffect,
   useRef,
-  useState,
+  useState
 } from "react";
 import useOutsideClick from "../../hooks/use-outside-click";
 import {
   StyledContainer,
   StyledSelect,
   StyledSelectItem,
-  StyledSelectPopover,
+  StyledSelectPopover
 } from "./Select.styles";
 import ArrowDownUrl from "../../assets/images/down_arrow.png";
 
@@ -51,7 +51,7 @@ const Select = forwardRef(
       error,
       name,
       defaultLabel,
-      disabled,
+      disabled
     },
     ref
   ) => {
@@ -76,6 +76,7 @@ const Select = forwardRef(
     function handleToggleSelect() {
       setIsSelectOpen(!isSelectOpen);
     }
+
     useEffect(() => {
       setSelectedValue(value);
       setSelectedLabel(defaultLabel ?? placeholder ?? "");
@@ -85,7 +86,7 @@ const Select = forwardRef(
       <SelectContext.Provider
         value={{
           handleSelectChange,
-          handleCloseSelect,
+          handleCloseSelect
         }}
       >
         <StyledContainer ref={popoverRef} disabled={disabled}>

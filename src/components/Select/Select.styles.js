@@ -22,7 +22,8 @@ export const StyledSelect = styled.div`
   user-select: none;
   border: ${(props) =>
     props.error ? "2px solid " + props.theme.colors.red100 : "none"};
-    pointer-events: ${(props) => (props.disabled ? "none" : "all")};
+  pointer-events: ${(props) => (props.disabled ? "none" : "all")};
+
   & img {
     width: 16px;
     height: 10px;
@@ -36,10 +37,12 @@ export const StyledSelectPopover = styled.div`
   border-radius: ${(props) => props.theme.radii.small};
   filter: drop-shadow(0px 4px 34px rgba(0, 0, 0, 0.25));
   z-index: ${(props) => props.theme.zIndices.popover};
+
   & > :first-child {
     border-top-left-radius: ${(props) => props.theme.radii.small};
     border-top-right-radius: ${(props) => props.theme.radii.small};
   }
+
   & > :last-child {
     border-bottom-left-radius: ${(props) => props.theme.radii.small};
     border-bottom-right-radius: ${(props) => props.theme.radii.small};

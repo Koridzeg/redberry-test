@@ -45,15 +45,18 @@ export const StyledStepContainer = styled.div`
   padding: 2rem 1rem 3rem;
   background-color: ${(props) => props.theme.colors.white100};
   border-radius: ${(props) => props.theme.radii.small};
+
   & > * {
     gap: 1rem;
   }
+
   & > * > a {
     text-decoration: none;
     & p:last-child {
       color: ${(props) => props.theme.colors.blue1000};
     }
   }
+
   @media (min-width: ${(props) => props.theme.breakpoints.small}) {
     padding: 5rem 10rem;
     gap: 2rem;
