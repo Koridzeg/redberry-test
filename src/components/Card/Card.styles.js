@@ -2,7 +2,11 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div``;
 
-export const StyledImage = styled.img``;
+export const StyledImage = styled.img`
+  width: 266px;
+  height: 200px;
+  border-radius: 10px;
+`;
 
 export const StyledUserName = styled.p``;
 

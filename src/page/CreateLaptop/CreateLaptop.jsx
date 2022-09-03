@@ -603,6 +603,7 @@ const CreateLaptop = () => {
             token: process.env.REACT_APP_TOKEN
           };
 
+
           for (let key in fomattedValues) {
             body.append(key, fomattedValues[key]);
           }

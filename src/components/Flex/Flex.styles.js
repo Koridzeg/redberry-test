@@ -6,11 +6,16 @@ export const StyledFlex = styled.div`
   flex-direction: ${(props) => props.flexDirection ?? "row"};
   align-items: ${(props) => props.alignItems ?? "center"};
   justify-content: ${(props) => props.justifyContent ?? "space-between"};
+  text-align: ${(props) => props.textAlign ?? "center"};
   border-radius: ${(props) => props.borderRadius ?? "0.625rem"};
+  border: ${(props) => props.border ?? "0"};
+  border-color: ${(props) => props.borderColor ?? "white"};
+  max-width: ${(props) => props.maxWidth ?? "unset"};
   background-color: ${(props) => props.backgroundColor ?? "white"};
   flex-wrap: ${(props) => props.flexWrap ?? "wrap"};
   gap: ${(props) => props.gap ?? "0"};
   margin: ${(props) => props.margin ?? "0"};
+  padding: ${(props) => props.padding ?? "0" };
   flex-grow: ${(props) => props.flexGrow ?? "0"};
   & > * {
     width: ${(props) =>

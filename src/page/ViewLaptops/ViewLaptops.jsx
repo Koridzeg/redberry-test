@@ -9,6 +9,8 @@ import {
   Card,
 } from "../../components/Card";
 import { Flex } from "../../components";
+import Grid from "../../components/Grid";
+import { Link } from "react-router-dom";
 
 const ViewLaptops = () => {
   const { data: laptops, error, isLoading, run } = useAsync(getLaptops);
@@ -26,11 +28,13 @@ const ViewLaptops = () => {
   }
 
   return (
-    <Flex gap="2rem">
+    <Grid>
+      <h1>ჩანაწერების სია</h1>
       {laptops.data.map((laptopInfo) => (
         <Card key={laptopInfo.laptop.id}>
           <Flex
-            backgroundColor="#AED1EA"
+            flexWrap="no-wrap"
+            backgroundColor="#EAFAFF"
             flexDirection="row"
             col="2"
           >
@@ -40,15 +44,18 @@ const ViewLaptops = () => {
               }
               alt={laptopInfo.laptop.name}
             />
-            <Flex backgroundColor="#AED1EA">
+            <Flex backgroundColor="#EAFAFF">
               <CardUserName>{laptopInfo.user.name}</CardUserName>
               <CardLaptopName>{laptopInfo.laptop.name}</CardLaptopName>
-              <CardLink to={laptopInfo.laptop.id}>See All</CardLink>
+              <Link to={laptopInfo.laptop.id}>
+                {" "}
+                <p> მეტის ნახვა </p>{" "}
+              </Link>
             </Flex>
           </Flex>
         </Card>
       ))}
-    </Flex>
+    </Grid>
   );
 };
 
