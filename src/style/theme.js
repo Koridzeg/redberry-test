@@ -1,4 +1,4 @@
-export const SMALL_BREAKPOINT = 390;
+export const SMALL_BREAKPOINT = 400;
 
 const theme = {
   colors: {
@@ -22,19 +22,19 @@ const theme = {
   space: {},
   fontSizes: {
     small: "14px",
-    medium: "20px",
+    medium: "20px"
   },
   fonts: {},
   fontWeights: {},
   lineHeights: {},
   letterSpacings: {},
   sizes: {
-    inputHeight: "60px",
+    inputHeight: "60px"
   },
   borderWidths: {},
   borderStyles: {},
   radii: {
-    small: "8px",
+    small: "8px"
   },
   shadows: {},
   zIndices: {

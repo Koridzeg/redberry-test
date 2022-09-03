@@ -1,20 +1,22 @@
+import axios from "axios";
+
 const API_URL = "https://pcfy.redberryinternship.ge/api";
 
-const getTeams = () => fetch(API_URL + "/teams");
+const getTeams = () => axios.get(API_URL + "/teams");
 
-const getPositions = () => fetch(API_URL + "/positions");
+const getPositions = () => axios.get(API_URL + "/positions");
 
-const getBrands = () => fetch(API_URL + "/brands");
+const getBrands = () => axios.get(API_URL + "/brands");
 
-const getCPUS = () => fetch(API_URL + "/cpus");
+const getCPUS = () => axios.get(API_URL + "/cpus");
 
-const createLaptop = (data) =>
-  fetch(API_URL + "/laptop/create", {
-    method: "POST",
-    body: JSON.stringify(data),
+
+const createLaptop = (data) => {
+  return axios.post(API_URL + "/laptop/create", data, {
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "multipart/form-data"
     }
   });
+};
 
-export { getTeams, getPositions, getBrands, getCPUS,createLaptop };
+export { getTeams, getPositions, getBrands, getCPUS, createLaptop };

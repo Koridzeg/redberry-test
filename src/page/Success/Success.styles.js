@@ -11,23 +11,13 @@ export const StyledContainer = styled.div`
   img {
     margin-top: 2rem;
   }
-`;
-
-export const StyledButtonsContainer = styled.div`
-  display: flex;
-  align: items-center;
-  flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 2rem;
   p {
-  color: ${(props) => props.theme.colors.blue1000};
-  text-decoration: none;
-  color: ${(props) => props.theme.colors.blue1000};
-}
-a {
-  text-decoration: none;
-}
-h2 {
-  text-align: center;
-}
+    color: ${(props) => props.theme.colors.blue1000};
+  }
+  a {
+    text-decoration: none;
+  }
+  h2 {
+    text-align: center;
+  }
 `;

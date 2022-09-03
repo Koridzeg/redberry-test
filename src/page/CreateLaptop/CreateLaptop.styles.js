@@ -2,8 +2,14 @@ import styled from "styled-components";
 
 export const StyledContainer = styled.div`
   width: 100%;
-  height: 100%;
+  min-height: 100%;
   background-color: ${(props) => props.theme.colors.gray300};
+  & > img {
+    margin: 3rem auto;
+  }
+  & button:last-child {
+    padding: 15px;
+  }
 `;
 
 export const StyledHeader = styled.header`
@@ -29,6 +35,8 @@ export const StyledHeader = styled.header`
 `;
 
 export const StyledStepContainer = styled.div`
+  max-width: 1226px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   align-items: ${(props) => props.alignItems ?? "flex-end"};
@@ -36,6 +44,18 @@ export const StyledStepContainer = styled.div`
   height: 100%;
   padding: 2rem 1rem 3rem;
   background-color: ${(props) => props.theme.colors.white100};
-  border-top-left-radius: ${(props) => props.theme.radii.small};
-  border-top-right-radius: ${(props) => props.theme.radii.small};
+  border-radius: ${(props) => props.theme.radii.small};
+  & > * {
+    gap: 1rem;
+  }
+  & > * > a {
+    text-decoration: none;
+    & p:last-child {
+      color: ${(props) => props.theme.colors.blue1000};
+    }
+  }
+  @media (min-width: ${(props) => props.theme.breakpoints.small}) {
+    padding: 5rem 10rem;
+    gap: 2rem;
+  }
 `;

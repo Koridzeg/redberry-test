@@ -6,14 +6,13 @@ export const useAsync = (promise) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const run = useCallback(
-    (...arg) => {
+    (...args) => {
       if (!promise) {
         throw new Error("provide a promise");
       }
 
-      return promise(arg)
-        .then(async (response) => {
-          const data = await response.json();
+      return promise(...args)
+        .then(async ({ data }) => {
           setData(data);
           return data;
         })
@@ -24,12 +23,10 @@ export const useAsync = (promise) => {
     },
     [promise]
   );
-
   const reset = () => {
     setData();
     setError();
     setIsLoading(false);
   };
-
   return { data, error, isLoading, run, reset };
 };
