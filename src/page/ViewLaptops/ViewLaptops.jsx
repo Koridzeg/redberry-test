@@ -7,10 +7,12 @@ import {
   CardLink,
   CardUserName,
   Card,
+  Title
 } from "../../components/Card";
 import { Flex } from "../../components";
 import Grid from "../../components/Grid";
 import { Link } from "react-router-dom";
+import {StyledContainer} from "./ViewLaptops.styles"
 
 const ViewLaptops = () => {
   const { data: laptops, error, isLoading, run } = useAsync(getLaptops);
@@ -28,11 +30,14 @@ const ViewLaptops = () => {
   }
 
   return (
-    <Grid>
-      <h1>ჩანაწერების სია</h1>
+    <>
+
+    <StyledContainer>
+      <Title> ჩანაწერების სია </Title>
       {laptops.data.map((laptopInfo) => (
         <Card key={laptopInfo.laptop.id}>
           <Flex
+            textAlign="center"
             flexWrap="no-wrap"
             backgroundColor="#EAFAFF"
             flexDirection="row"
@@ -55,7 +60,8 @@ const ViewLaptops = () => {
           </Flex>
         </Card>
       ))}
-    </Grid>
+    </StyledContainer>
+    </>
   );
 };
 

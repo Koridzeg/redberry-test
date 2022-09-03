@@ -4,21 +4,30 @@ import {
   StyledLaptopName,
   StyledLink,
   StyledUserName,
+  ContentTitle,
 } from "./Card.styles";
 
 const Card = ({ children }) => {
   return (
-    <Flex
-    padding="1em"
-      maxWidth="40rem"
-      border="1px solid"
-      borderColor="#AED1EA"
-      flexDirection="row"
-      col="3"
-    >
-      {children}
-    </Flex>
+    <>
+      <Flex
+        margin="2em"
+        padding="1em"
+        maxWidth="40rem"
+        backgroundColor="#EAFAFF"
+        border="1px solid"
+        borderColor="#AED1EA"
+        flexDirection="row"
+        col="3"
+      >
+        {children}
+      </Flex>
+    </>
   );
+};
+
+const Title = ({ children }) => {
+  return <ContentTitle>{children}</ContentTitle>;
 };
 
 const CardImage = ({ src, alt }) => {
@@ -37,4 +46,4 @@ const CardLink = ({ to, children }) => {
   return <StyledLink to={to}>{children}</StyledLink>;
 };
 
-export { Card, CardImage, CardUserName, CardLaptopName, CardLink };
+export { Card, CardImage, CardUserName, CardLaptopName, CardLink,Title };
