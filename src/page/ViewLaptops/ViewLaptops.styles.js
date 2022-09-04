@@ -25,4 +25,10 @@ export const StyledTitle = styled.h2`
     color: #232323;
     margin-top: 25px;
   }
+  & > img {
+    position: absolute;
+    top:5%;
+    left: 1rem;
+    transform: translateY(-50%);
+  }
 `;

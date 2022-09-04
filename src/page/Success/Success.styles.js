@@ -20,4 +20,11 @@ export const StyledContainer = styled.div`
   h2 {
     text-align: center;
   }
+
+  @media (min-width: 1000px) {
+    img {
+      width: 400px;
+    }
+    background-color:#4A4A4A;
+  }
 `;

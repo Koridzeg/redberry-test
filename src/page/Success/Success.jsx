@@ -11,18 +11,18 @@ const Success = () => {
         justifyContent="center"
         gap="1rem"
         flexGrow="1"
+        backgroundColor="#FFFFFF"
       >
         <img src={SuccessImgUrl} alt="success" />
-        <h2>
-          ჩანაწერი <br />
-          დამატებულია!
-        </h2>
+        <h2>ჩანაწერი დამატებულია!</h2>
       </Flex>
       <Flex
         flexDirection="column"
         justifyContent="center"
         gap="1rem"
         margin="0 0 2rem 0"
+        textAlign="center"
+        backgroundColor="#FFFFFF"
       >
         <Link to="/laptops">
           <Button>სიაში გადაყვანა</Button>

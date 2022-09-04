@@ -33,3 +33,12 @@ export const StyledRow = styled.div`
     font-size: 14px;
   }
 `;
+
+export const StyledImg = styled.div`
+& > img {
+  position: absolute;
+  top:5%;
+  left: 1rem;
+  transform: translateY(-50%);
+}
+`

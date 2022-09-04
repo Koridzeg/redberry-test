@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { lazy, Suspense, } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import theme from "./style/theme";
@@ -9,7 +9,9 @@ const ViewLaptopDetails = lazy(() => import("./page/ViewLaptopDetails"));
 const ViewLaptops = lazy(() => import("./page/ViewLaptops"));
 const Success = lazy(() => import("./page/Success"));
 
+
 function App() {
+ 
   return (
     <ThemeProvider theme={theme}>
       <Suspense fallback={<div>...loading</div>}>

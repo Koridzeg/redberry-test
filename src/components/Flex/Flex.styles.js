@@ -20,6 +20,6 @@ export const StyledFlex = styled.div`
   flex-grow: ${(props) => props.flexGrow ?? "0"};
   & > * {
     width: ${(props) =>
-      props.col ? `calc(${100 / props.col}% - 1rem) !important` : "unset"};
+      props.col ? `calc(${100 / props.col}% - 1rem) !important` : "inherit"};
   }
 `;
