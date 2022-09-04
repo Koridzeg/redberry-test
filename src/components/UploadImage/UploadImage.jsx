@@ -27,7 +27,6 @@ const UploadImage = forwardRef(
     const previewUrl = image && URL.createObjectURL(image);
 
     function handleAddImage(event) {
-      console.log(event.target.files);
       setImage(event.target.files[0]);
       onChange && onChange(event);
     }

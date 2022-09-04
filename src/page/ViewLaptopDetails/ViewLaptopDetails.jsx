@@ -23,7 +23,6 @@ const ViewLaptopDetails = () => {
     return <div>an error has occurred</div>;
   }
 
-  console.log(laptopInfo);
 
   return (
     <StyledContainer>
