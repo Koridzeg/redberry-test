@@ -1,37 +1,31 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-export const StyledContainer = styled.div``;
+export const StyledContainer = styled.div`
+  width: 360px;
+  height: 120px;
+  padding: 0.5rem;
+  background-color: #eafaff;
+  border: 1px solid;
+  border-color: #aed1ea;
+  flex-direction: row;
+  border-radius: ${(props) => props.theme.radii.small};
+`;
 
 export const StyledImage = styled.img`
-  width: 266px;
-  height: 178px;
-  border-radius: 10px;
+  height: 100%;
+  object-fit: scale-down;
+  border-radius: ${(props) => props.theme.radii.small};
 `;
 
 export const StyledUserName = styled.p``;
 
 export const StyledLaptopName = styled.p`
-  margin: 0;
-  margin-top: 18px;
   color: #2e2e2e;
   font-size: 18px;
-  font-family: "helvetica regular";
 `;
 
-export const StyledLink = styled.a`
-  margin-top: 20px;
-  color: #4386A9;
+export const StyledLink = styled(Link)`
+  color: #4386a9;
   font-size: 16px;
-`;
-
-export const ContentTitle = styled.h2`
-  font-size: 36px;
-  color: #000000;
-  margin-top: 64px;
-  font-family: "helvetica medium";
-  @media (max-width: 390px) {
-    font-size: 16px;
-    color: #232323;
-    margin-top: 25px;
-  }
 `;

@@ -10,11 +10,11 @@ const getBrands = () => axios.get(API_URL + "/brands");
 
 const getCPUS = () => axios.get(API_URL + "/cpus");
 
-const getLaptops = () => axios.get(API_URL + `/laptops?token=${process.env.REACT_APP_TOKEN}`)
+const getLaptops = () =>
+  axios.get(API_URL + `/laptops?token=${process.env.REACT_APP_TOKEN}`);
 
-const getLaptopById = () => axios.get(
-  API_URL + `/laptop/${params.laptop_id}?token=${process.env.REACT_APP_TOKEN}`
-);
+const getLaptopById = (id) =>
+  axios.get(API_URL + `/laptop/${id}?token=${process.env.REACT_APP_TOKEN}`);
 
 const createLaptop = (data) => {
   return axios.post(API_URL + "/laptop/create", data, {
@@ -24,4 +24,12 @@ const createLaptop = (data) => {
   });
 };
 
-export { getTeams, getPositions, getBrands, getCPUS, createLaptop,getLaptops,getLaptopById };
+export {
+  getTeams,
+  getPositions,
+  getBrands,
+  getCPUS,
+  createLaptop,
+  getLaptops,
+  getLaptopById
+};

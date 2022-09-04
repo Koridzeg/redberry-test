@@ -1,33 +1,13 @@
-import Flex from "../Flex";
 import {
+  StyledContainer,
   StyledImage,
   StyledLaptopName,
   StyledLink,
-  StyledUserName,
-  ContentTitle,
+  StyledUserName
 } from "./Card.styles";
 
 const Card = ({ children }) => {
-  return (
-    <>
-      <Flex
-        margin="2em"
-        padding="1em"
-        maxWidth="40rem"
-        backgroundColor="#EAFAFF"
-        border="1px solid"
-        borderColor="#AED1EA"
-        flexDirection="row"
-        col="3"
-      >
-        {children}
-      </Flex>
-    </>
-  );
-};
-
-const Title = ({ children }) => {
-  return <ContentTitle>{children}</ContentTitle>;
+  return <StyledContainer>{children}</StyledContainer>;
 };
 
 const CardImage = ({ src, alt }) => {
@@ -46,4 +26,4 @@ const CardLink = ({ to, children }) => {
   return <StyledLink to={to}>{children}</StyledLink>;
 };
 
-export { Card, CardImage, CardUserName, CardLaptopName, CardLink,Title };
+export { Card, CardImage, CardUserName, CardLaptopName, CardLink };

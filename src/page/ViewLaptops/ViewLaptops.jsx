@@ -6,12 +6,11 @@ import {
   CardLaptopName,
   CardLink,
   CardUserName,
-  Card,
-  Title,
+  Card
 } from "../../components/Card";
 import { Flex } from "../../components";
 import { Link } from "react-router-dom";
-import { StyledContainer } from "./ViewLaptops.styles";
+import { StyledContainer,StyledTitle } from "./ViewLaptops.styles";
 
 const ViewLaptops = () => {
   const { data: laptops, error, isLoading, run } = useAsync(getLaptops);
@@ -30,18 +29,11 @@ const ViewLaptops = () => {
 
   return (
     <>
-  
+      <StyledTitle>ჩანაწერების სია</StyledTitle>
       <StyledContainer>
-        <Title> ჩანაწერების სია </Title>
         {laptops.data.map((laptopInfo) => (
           <Card key={laptopInfo.laptop.id}>
-            <Flex
-              textAlign="center"
-              flexWrap="no-wrap"
-              backgroundColor="#EAFAFF"
-              flexDirection="row"
-              col="2"
-            >
+            <Flex flexDirection="row" flexWrap="nowrap" col="2">
               <CardImage
                 src={
                   "https://pcfy.redberryinternship.ge/" +
@@ -49,12 +41,17 @@ const ViewLaptops = () => {
                 }
                 alt={laptopInfo.laptop.name}
               />
-              <Flex backgroundColor="#EAFAFF">
+              <Flex
+                flexDirection="column"
+                alignItems="flex-start"
+                flexWrap="nowrap"
+                padding="0.5rem 0"
+              >
                 <CardUserName>{laptopInfo.user.name}</CardUserName>
                 <CardLaptopName>{laptopInfo.laptop.name}</CardLaptopName>
-                <Link to={"/laptops/" + laptopInfo.laptop.id}>
-                  <p> მეტის ნახვა </p>
-                </Link>
+                <CardLink to={"/laptops/" + laptopInfo.laptop.id}>
+                  მეტის ნახვა
+                </CardLink>
               </Flex>
             </Flex>
           </Card>
@@ -63,5 +60,4 @@ const ViewLaptops = () => {
     </>
   );
 };
-
 export default ViewLaptops;
