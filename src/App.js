@@ -1,4 +1,4 @@
-import { lazy, Suspense, } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import theme from "./style/theme";
@@ -9,9 +9,26 @@ const ViewLaptopDetails = lazy(() => import("./page/ViewLaptopDetails"));
 const ViewLaptops = lazy(() => import("./page/ViewLaptops"));
 const Success = lazy(() => import("./page/Success"));
 
-
 function App() {
- 
+  const [,setDimensions] = useState({
+    height: window.innerHeight,
+    width: window.innerWidth,
+  });
+
+  useEffect(() => {
+    function handleResize() {
+      setDimensions({
+        height: window.innerHeight,
+        width: window.innerWidth,
+      });
+    }
+    window.addEventListener("resize", handleResize);
+    handleResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  },[]);
+
   return (
     <ThemeProvider theme={theme}>
       <Suspense fallback={<div>...loading</div>}>
