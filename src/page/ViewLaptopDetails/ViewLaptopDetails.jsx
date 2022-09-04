@@ -9,8 +9,9 @@ import {
 } from "./ViewLaptopDetails.styles";
 import Divider from "../../components/Divider/Divider";
 import Flex from "../../components/Flex/Flex";
-import { SMALL_BREAKPOINT } from "../../style/theme";
+import theme, { SMALL_BREAKPOINT } from "../../style/theme";
 import LeftArrowIconUrl from "../../assets/images/left_arrow.png";
+import LeftArrowDesktop from "../../assets/images/desktopback.png";
 
 const ViewLaptopDetails = () => {
   const { laptop_id } = useParams();
@@ -29,14 +30,20 @@ const ViewLaptopDetails = () => {
     return <div>an error has occurred</div>;
   }
 
-  const onIconClick = () => {
-    navigate("/laptops");
-  };
-
   return (
     <>
       <StyledImg>
-        <img src={LeftArrowIconUrl} onClick={onIconClick} alt="go back" />
+      <picture onClick={() => navigate('/laptops')}>
+          <source
+            media={`(max-width: ${theme.breakpoints.small})`}
+            srcSet={LeftArrowIconUrl}
+          />
+          <source
+            media={`(min-width: ${theme.breakpoints.small})`}
+            srcSet={LeftArrowDesktop}
+          />
+          <img src={LeftArrowIconUrl} alt="back" />
+        </picture>
       </StyledImg>
       <StyledContainer>
         <h2>ლეპტოპის ინფო</h2>
@@ -50,25 +57,25 @@ const ViewLaptopDetails = () => {
           />
           <Flex>
             <StyledRow>
-              <p>სახელი:</p>
+              <h3>სახელი:</h3>
               <p>
                 {laptopInfo.data.user.name} {laptopInfo.data.user.surname}
               </p>
             </StyledRow>
             <StyledRow>
-              <p>თიმი:</p>
+              <h3>თიმი:</h3>
               <p>{laptopInfo.data.user.team_id}</p>
             </StyledRow>
             <StyledRow>
-              <p>პოზიცია:</p>
+              <h3>პოზიცია:</h3>
               <p>{laptopInfo.data.user.position_id}</p>
             </StyledRow>
             <StyledRow>
-              <p>მეილი:</p>
+              <h3>მეილი:</h3>
               <p>{laptopInfo.data.user.email}</p>
             </StyledRow>
             <StyledRow>
-              <p>ტელ. ნომერი:</p>
+              <h3>ტელ. ნომერი:</h3>
               <p>{laptopInfo.data.user.phone_number}</p>
             </StyledRow>
           </Flex>
@@ -76,47 +83,47 @@ const ViewLaptopDetails = () => {
         <Divider />
         <Flex col={SMALL_BREAKPOINT < window.innerWidth && 2}>
           <StyledRow>
-            <p>ლეპტოპის სახელი:</p>
+            <h3>ლეპტოპის სახელი:</h3>
             <p>{laptopInfo.data.laptop.name}</p>
           </StyledRow>
           <StyledRow>
-            <p>ლეპტოპის ბრენდი:</p>
+            <h3>ლეპტოპის ბრენდი:</h3>
             <p>{laptopInfo.data.laptop.brand_id}</p>
           </StyledRow>
           <StyledRow>
-            <p>RAM:</p>
+            <h3>RAM:</h3>
             <p>{laptopInfo.data.laptop.ram}</p>
           </StyledRow>
           <StyledRow>
-            <p>მეხსიერების ტიპი:</p>
+            <h3>მეხსიერების ტიპი:</h3>
             <p>{laptopInfo.data.laptop.hard_drive_type}</p>
           </StyledRow>
           <StyledRow>
-            <p>CPU:</p>
+            <h3>CPU:</h3>
             <p>{laptopInfo.data.laptop.cpu.name}</p>
           </StyledRow>
           <StyledRow>
-            <p>CPU-ს ბირთვი:</p>
+            <h3>CPU-ს ბირთვი:</h3>
             <p>{laptopInfo.data.laptop.cpu.cores}</p>
           </StyledRow>
           <StyledRow>
-            <p>CPU-ს ნაკადი:</p>
+            <h3>CPU-ს ნაკადი:</h3>
             <p>{laptopInfo.data.laptop.cpu.threads}</p>
           </StyledRow>
         </Flex>
         <Divider />
         <Flex col={SMALL_BREAKPOINT < window.innerWidth && 2}>
           <StyledRow>
-            <p>მდგომარეობა:</p>
+            <h3>მდგომარეობა:</h3>
             <p>{laptopInfo.data.laptop.state}</p>
           </StyledRow>
           <StyledRow>
-            <p>ლეპტოპის ფასი:</p>
-            <p>{laptopInfo.data.laptop.price}</p>
+            <h3>ლეპტოპის ფასი:</h3>
+            <p>{laptopInfo.data.laptop.price}₾</p>
           </StyledRow>
           {laptopInfo.data.laptop.purchase_date && (
             <StyledRow>
-              <p>შეძენის რიცხვი:</p>
+              <h3>შეძენის რიცხვი:</h3>
               <p>{laptopInfo.data.laptop.purchase_date}</p>
             </StyledRow>
           )}

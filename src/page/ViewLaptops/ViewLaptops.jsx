@@ -12,6 +12,8 @@ import { Flex } from "../../components";
 import { Link, useNavigate } from "react-router-dom";
 import { StyledContainer, StyledTitle } from "./ViewLaptops.styles";
 import LeftArrowIconUrl from "../../assets/images/left_arrow.png";
+import LeftArrowDesktop from "../../assets/images/desktopback.png";
+import theme from "../../style/theme";
 
 const ViewLaptops = () => {
   const { data: laptops, error, isLoading, run } = useAsync(getLaptops);
@@ -28,14 +30,20 @@ const ViewLaptops = () => {
     return <div>an error has occurred</div>;
   }
 
-  const onIconClick = () => {
-    navigate("/");
-  };
-
   return (
     <>
       <StyledTitle>
-        <img src={LeftArrowIconUrl} onClick={onIconClick} alt="go back" />
+      <picture onClick={() => navigate('/')}>
+          <source
+            media={`(max-width: ${theme.breakpoints.small})`}
+            srcSet={LeftArrowIconUrl}
+          />
+          <source
+            media={`(min-width: ${theme.breakpoints.small})`}
+            srcSet={LeftArrowDesktop}
+          />
+          <img src={LeftArrowIconUrl} alt="back" />
+        </picture>
         ჩანაწერების სია
       </StyledTitle>
       <StyledContainer>

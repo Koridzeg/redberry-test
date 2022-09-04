@@ -25,7 +25,7 @@ export const StyledTitle = styled.h2`
     color: #232323;
     margin-top: 25px;
   }
-  & > img {
+  & > picture {
     position: absolute;
     top:5%;
     left: 1rem;

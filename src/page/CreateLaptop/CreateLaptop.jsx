@@ -7,10 +7,11 @@ import {
   RadioGroup,
   Radio,
   Flex,
-  Divider
+  Divider,
 } from "../../components";
 import { useEffect } from "react";
 import LeftArrowIconUrl from "../../assets/images/left_arrow.png";
+import LeftArrowDesktop from "../../assets/images/desktopback.png";
 import FooterImgUrl from "../../assets/images/footer.png";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAsync } from "../../hooks/use-async";
@@ -19,16 +20,16 @@ import {
   getCPUS,
   getPositions,
   getTeams,
-  createLaptop
+  createLaptop,
 } from "../../api";
 import {
   StyledContainer,
   StyledHeader,
-  StyledStepContainer
+  StyledStepContainer,
 } from "./CreateLaptop.styles";
 import { Formik, useFormikContext } from "formik";
 import useLocalStorage from "../../hooks/use-local-storage";
-import { SMALL_BREAKPOINT } from "../../style/theme";
+import theme, { SMALL_BREAKPOINT } from "../../style/theme";
 
 const formatPhoneNumber = (number) =>
   Number(number?.replaceAll("+", "").replaceAll(" ", ""));
@@ -51,7 +52,7 @@ const initialValues = {
   laptop_hard_drive_type: "",
   laptop_state: "",
   laptop_purchase_date: "",
-  laptop_price: undefined
+  laptop_price: undefined,
 };
 
 const validateFirstStep = (values) => {
@@ -103,7 +104,7 @@ const validateSecondStep = (values) => {
   const onlyEnglishAndNumbers = /^[a-zA-Z0-0]+$/g;
   const onlyNumbers = /^[0-9]+$/g;
   const onlyDate =
-    /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/g;
+  /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/g;
   const errors = {};
 
   if (!values.laptop_image?.name) {
@@ -176,7 +177,7 @@ const validate = (values) => {
   errors = {
     ...errors,
     ...firstStepErrors,
-    ...secondStepErrors
+    ...secondStepErrors,
   };
 
   return errors;
@@ -187,13 +188,13 @@ export const FirstStep = () => {
     data: teams,
     error: teamsError,
     isLoading: teamsIsLoading,
-    run: teamsRun
+    run: teamsRun,
   } = useAsync(getTeams);
   const {
     data: positions,
     error: positionsError,
     isLoading: positionsIsLoading,
-    run: positionsRun
+    run: positionsRun,
   } = useAsync(getPositions);
 
   const [, setPersistedValues] = useLocalStorage(
@@ -343,13 +344,13 @@ export const SecondStep = () => {
     data: brands,
     error: brandsError,
     isLoading: brandsIsLoading,
-    run: brandsRun
+    run: brandsRun,
   } = useAsync(getBrands);
   const {
     data: cpus,
     error: cpusError,
     isLoading: cpusIsLoading,
-    run: cpusRun
+    run: cpusRun,
   } = useAsync(getCPUS);
 
   const [, setPersistedValues] = useLocalStorage(
@@ -370,7 +371,7 @@ export const SecondStep = () => {
   function handleFormikUploadImageChange(event) {
     setPersistedValues({
       ...formik.values,
-      [event.target.name]: event.target.files[0]
+      [event.target.name]: event.target.files[0],
     });
     formik.setFieldValue(event.target.name, event.target.files[0]);
   }
@@ -548,7 +549,7 @@ const CreateLaptop = () => {
   const {
     error: createLaptopError,
     isLoading: createLaptopIsLoading,
-    run: createLaptopRun
+    run: createLaptopRun,
   } = useAsync(createLaptop);
   const [persistedValues, setPersistedValues] = useLocalStorage(
     "create-laptop",
@@ -573,11 +574,23 @@ const CreateLaptop = () => {
   return (
     <StyledContainer>
       <StyledHeader>
-        <img
+        <picture onClick={() => navigate(-1)}>
+          <source
+            media={`(max-width: ${theme.breakpoints.small})`}
+            srcSet={LeftArrowIconUrl}
+          />
+          <source
+            media={`(min-width: ${theme.breakpoints.small})`}
+            srcSet={LeftArrowDesktop}
+          />
+          <img src={LeftArrowIconUrl} alt="back" />
+        </picture>
+        {/* <img
           src={LeftArrowIconUrl}
           alt="go back"
           onClick={() => navigate(-1)}
-        />
+        /> */}
+
         <div>
           <h3>
             {step === 1 ? "თანამშრომლის ინფო" : "ლეპტოპის მახასიათებლები"}
@@ -600,9 +613,8 @@ const CreateLaptop = () => {
             laptop_price: Number(values.laptop_cpu_cores),
             laptop_image: values.laptop_image,
             phone_number: `+${formatPhoneNumber(values.phone_number)}`,
-            token: process.env.REACT_APP_TOKEN
+            token: process.env.REACT_APP_TOKEN,
           };
-
 
           for (let key in fomattedValues) {
             body.append(key, fomattedValues[key]);

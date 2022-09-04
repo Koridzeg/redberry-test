@@ -20,7 +20,7 @@ export const StyledHeader = styled.header`
   text-align: center;
   padding: 1rem;
   & > a,
-  & > img {
+  & > picture {
     position: absolute;
     top: 50%;
     left: 1rem;

@@ -22,6 +22,14 @@ export const StyledContainer = styled.div`
     width: 300px !important;
     margin-bottom: 2rem;
   }
+
+  p {
+    color: #797979;
+  }
+
+  h3 {
+    font-size: 14px;
+  }
 `;
 
 export const StyledRow = styled.div`
@@ -35,10 +43,10 @@ export const StyledRow = styled.div`
 `;
 
 export const StyledImg = styled.div`
-& > img {
-  position: absolute;
-  top:5%;
-  left: 1rem;
-  transform: translateY(-50%);
-}
-`
+  & > picture {
+    position: absolute;
+    top: 5%;
+    left: 1rem;
+    transform: translateY(-50%);
+  }
+`;
