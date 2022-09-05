@@ -56,7 +56,7 @@ const ViewLaptopDetails = () => {
     return <div>loading...</div>;
   }
 
-  if (error || teamsError || positionsError) {
+  if (error || teamsError || positionsError || brandsError) {
     return <div>an error has occurred</div>;
   }
 
