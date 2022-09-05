@@ -9,7 +9,7 @@ import {
   Card,
 } from "../../components/Card";
 import { Flex } from "../../components";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { StyledContainer, StyledTitle } from "./ViewLaptops.styles";
 import LeftArrowIconUrl from "../../assets/images/left_arrow.png";
 import LeftArrowDesktop from "../../assets/images/desktopback.png";

@@ -30,6 +30,7 @@ import {
 import { Formik, useFormikContext } from "formik";
 import useLocalStorage from "../../hooks/use-local-storage";
 import theme, { SMALL_BREAKPOINT } from "../../style/theme";
+import { useMemo } from "react";
 
 const formatPhoneNumber = (number) =>
   Number(number?.replaceAll("+", "").replaceAll(" ", ""));
@@ -104,7 +105,7 @@ const validateSecondStep = (values) => {
   const onlyEnglishAndNumbers = /^[a-zA-Z0-0]+$/g;
   const onlyNumbers = /^[0-9]+$/g;
   const onlyDate =
-  /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/g;
+    /^(((0[1-9]|[12][0-9]|3[01])[- /.](0[13578]|1[02])|(0[1-9]|[12][0-9]|30)[- /.](0[469]|11)|(0[1-9]|1\d|2[0-8])[- /.]02)[- /.]\d{4}|29[- /.]02[- /.](\d{2}(0[48]|[2468][048]|[13579][26])|([02468][048]|[1359][26])00))$/g;
   const errors = {};
 
   if (!values.laptop_image?.name) {
@@ -557,7 +558,32 @@ const CreateLaptop = () => {
   );
   const navigate = useNavigate();
   const { pathname } = useLocation();
+
   const step = Number(pathname.split("/").at(-1));
+
+  const text = useMemo(() => {
+    if (step === 1 && window.innerWidth < 400) {
+      return "თანამშრომლის ინფო";
+    } else if (step === 1 && window.innerWidth > 400) {
+      return <> თანამშრომლის ინფო &emsp; &emsp; ლეპტოპის მახასიათებლები </>
+    } else if (step === 2 && window.innerWidth < 400) {
+      return "ლეპტოპის მახასიათებლები";
+    } else if (step === 2 && window.innerWidth > 400) {
+      return <> თანამშრომლის ინფო &emsp; &emsp; ლეპტოპის მახასიათებლები </>
+    }
+  }, [step]);
+
+  const steps = useMemo(() => {
+    if (step === 1 && window.innerWidth < 400) {
+      return `${step}/2`;
+    } else if (step === 1 && window.innerWidth > 400) {
+      return "";
+    } else if (step === 2 && window.innerWidth < 400) {
+      return `${step}/2`;
+    } else if (step === 2 && window.innerWidth > 400) {
+      return "";
+    }
+  }, [step]);
 
   if (pathname.includes("success")) {
     return <Outlet />;
@@ -592,10 +618,8 @@ const CreateLaptop = () => {
         /> */}
 
         <div>
-          <h3>
-            {step === 1 ? "თანამშრომლის ინფო" : "ლეპტოპის მახასიათებლები"}
-          </h3>
-          <p>{step}/2</p>
+          <h3>{text}</h3>
+          <p>{steps}</p>
         </div>
       </StyledHeader>
       <Formik
