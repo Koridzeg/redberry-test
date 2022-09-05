@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getLaptopById } from "../../api";
+import { getBrands, getLaptopById, getPositions, getTeams } from "../../api";
 import { useAsync } from "../../hooks/use-async";
 import {
   StyledContainer,
@@ -16,24 +16,54 @@ import LeftArrowDesktop from "../../assets/images/desktopback.png";
 const ViewLaptopDetails = () => {
   const { laptop_id } = useParams();
   const { data: laptopInfo, error, isLoading, run } = useAsync(getLaptopById);
+  const {
+    data: teams,
+    error: teamsError,
+    isLoading: teamsIsLoading,
+    run: teamsRun,
+  } = useAsync(getTeams);
+  const {
+    data: positions,
+    error: positionsError,
+    isLoading: positionsIsLoading,
+    run: positionsRun,
+  } = useAsync(getPositions);
+  const {
+    data: brands,
+    error: brandsError,
+    isLoading: brandsIsLoading,
+    run: brandsRun,
+  } = useAsync(getBrands);
   const navigate = useNavigate();
 
   useEffect(() => {
     run(laptop_id);
-  }, [laptop_id, run]);
+    teamsRun();
+    positionsRun();
+    brandsRun();
+  }, [brandsRun, laptop_id, positionsRun, run, teamsRun]);
 
-  if (isLoading || (!laptopInfo && !error)) {
+  if (
+    brandsIsLoading ||
+    isLoading ||
+    teamsIsLoading ||
+    positionsIsLoading ||
+    (!teams && !teamsError) ||
+    (!positions && !positionsError) ||
+    (!laptopInfo && !error) ||
+    (!brands && !brandsError)
+  ) {
     return <div>loading...</div>;
   }
 
-  if (error) {
+  if (error || teamsError || positionsError) {
     return <div>an error has occurred</div>;
   }
 
   return (
     <>
       <StyledImg>
-      <picture onClick={() => navigate('/laptops')}>
+        <picture onClick={() => navigate("/laptops")}>
           <source
             media={`(max-width: ${theme.breakpoints.small})`}
             srcSet={LeftArrowIconUrl}
@@ -64,11 +94,21 @@ const ViewLaptopDetails = () => {
             </StyledRow>
             <StyledRow>
               <h3>თიმი:</h3>
-              <p>{laptopInfo.data.user.team_id}</p>
+              <p>
+                {teams &&
+                  teams.data.find(
+                    (item) => item.id === laptopInfo.data.user.team_id
+                  ).name}
+              </p>
             </StyledRow>
             <StyledRow>
               <h3>პოზიცია:</h3>
-              <p>{laptopInfo.data.user.position_id}</p>
+              <p>
+                {positions &&
+                  positions.data.find(
+                    (item) => item.id === laptopInfo.data.user.position_id
+                  ).name}
+              </p>
             </StyledRow>
             <StyledRow>
               <h3>მეილი:</h3>
@@ -88,7 +128,12 @@ const ViewLaptopDetails = () => {
           </StyledRow>
           <StyledRow>
             <h3>ლეპტოპის ბრენდი:</h3>
-            <p>{laptopInfo.data.laptop.brand_id}</p>
+            <p>
+              {brands &&
+                brands.data.find(
+                  (item) => item.id === laptopInfo.data.laptop.brand_id
+                ).name}
+            </p>
           </StyledRow>
           <StyledRow>
             <h3>RAM:</h3>
@@ -115,7 +160,9 @@ const ViewLaptopDetails = () => {
         <Flex col={SMALL_BREAKPOINT < window.innerWidth && 2}>
           <StyledRow>
             <h3>მდგომარეობა:</h3>
-            <p>{laptopInfo.data.laptop.state}</p>
+            <p>
+              {laptopInfo.data.laptop.state === "new" ? "ახალი" : "მეორადი"}
+            </p>
           </StyledRow>
           <StyledRow>
             <h3>ლეპტოპის ფასი:</h3>
