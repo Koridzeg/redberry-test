@@ -11,7 +11,6 @@ npm install
 
 - **src/**
 
-- **app/** - store used for managing global state
 - **assets/images/** - just images.
 - **components/** - Custom made JSX Components (Select & Button etc..)
 - **hooks/** - Custom made hooks.
